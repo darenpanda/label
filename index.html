@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>食品表示</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="app.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h2>食品表示ラベル</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <form id="person" action="">
+                    <div class="form-group">
+                        <label for="">名称</label><textarea type="text" class="form-control" name="section" id="section" rows="1">食パン</textarea></div>
+                    <div class="form-group">
+                    <div class="form-group">
+                        <label for="">原材料名</label>
+                        <div>
+                            <textarea type="text" class="form-control" name="address" id="address" rows="2">「小麦粉、砂糖、植物性油脂、パン酵母、食塩」など、原材料に占める重量割合の高いものから順に表示。
+                            </textarea>
+                        </div>
+                        <label for="">添加物</label>
+                        <div>
+                            <textarea type="text" class="form-control" name="tenka" id="tenka" rows="2">添加物の記載
+                            </textarea>
+<!-- 
+                            <input type="text" class="form-control col-xs-12" name="FirstKana" id="FirstKana" value="乳化剤"> -->
+                        </div>
+                        <div>
+                            <label for="">原料原産地名</label>    
+                            <input type="text" class="form-control" name="LastKana" id="LastKana" value="国内製造" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <labelfor="">内容量</labelfor=>
+                        <div>
+                            <input type="text" class="form-control " name="qty" id="qty" value="1個" />
+                        </div>
+                        <div>
+                        <label for="">賞味期限</label>
+                            <input type="text" class="form-control" name="LastName" id="LastName" value="2022/09/30" />
+                        </div>
+                    </div>
+
+                    </div>
+
+                    
+                    <div class="float-right">
+                        <button class="btn btn-primary" id="submit" style="width:100px; margin-right:15px">印　刷</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <table class="preview">
+                    <tbody>
+ <tr>
+                         
+                                <!-- <img class="logo" alt=""> -->
+                                <!-- <div style="float:left; margin-right:5mm"> -->
+                                    
+                                    <td id=""> 
+                                    <!-- <div style="float:left; margin-right:5mm"> -->
+                                        <!-- <p class="FirstKana" />
+                                        <p class="KanaSpan" />
+                                        <p class="FirstName" />
+                                    </div> -->
+                                    <!-- <div style="float:left"> -->
+
+                                        <p class="section2">名称</p>    
+                                        <p class="section3">原材料名</p>    
+                                        <!-- <p class="section4">添加物</p>     -->
+                                        <p class="section7">消費期限</p>   
+                                        <p class="section8">添加物</p> 
+                                        <p class="section9">内容量</p>
+                                        <!-- <p class="section5">原料原産地名</p>    
+                                        <p class="section6">内容量</p>    
+                                        
+                                        <p class="section8">保存方法</p>    
+                                        <p class="section9">事業所の名称</p>    --> 
+
+
+                                        <p class="address" />
+                                        <p class="tenka" />
+                                        <p class="section" />
+                                        <p class="LastKana" />
+                                        <p class="KanaSpan" />
+                                        <p class="FirstName" />
+                                        <p class="KanaSpan" />
+                                        <p class="LastName" />
+                                        <!-- <p class="section2"/>
+                                        <p class="section3"/> -->
+                                        <p class="section4"/>
+                                        <!-- <p class="section7"/> -->
+</div>
+                                </ｐclass=>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //// 入力項目の更新に応じてプレビューも変更
+            $('input,textarea').on('keyup', function () {
+                updatePreview();
+            })
+            //// 印刷ボタンクリック時（印刷画面をオープンする）
+            $('#submit').on('click', function (e) {
+                e.preventDefault();
+                var url = 'print_image.html';
+                window.open(url);
+            })
+
+            // 画面初期化処理
+            updatePreview();
+
+        })
+
+        // プレビューの更新処理
+        function updatePreview() {
+
+            // 各欄の更新処理
+            // $(".logo").attr("src", "logo.png");
+            $(".section").html($("#section").val());
+            $(".FirstKana").html($("#FirstKana").val());
+            $(".FirstName").html($("#FirstName").val());
+            $(".LastKana").html($("#LastKana").val());
+            $(".LastName").html($("#LastName").val());
+            $(".address").html($("#address").val());
+            $(".section2").html($("#section2").val());
+            $(".qty").html($("#qty").val());
+
+            // 部署の行数（１～３行）によって行間隔を整える
+            // var tmp = $("#section").val().match(/\n/g);
+            // var cnt = tmp ? tmp.length : 0;
+            // if (cnt < 1) {
+            //     $(".section").css("font-size", "8.5pt");
+            //     $(".section").css("top", "8.5pt");
+            //     $(".Name").css("top", "8.5pt");
+            // } else if (cnt == 1) {
+            //     $(".section").css("font-size", "8.5pt");
+            //     $(".section").css("top", "8.5pt");
+            //     $(".Name").css("top", "8.5pt");
+            // } else if (cnt > 1) {
+            //     $(".section").css("font-size", "8.5pt");
+            //     $(".section").css("top", "8.5pt");
+            //     $(".Name").css("top", "8.5pt");
+            // }
+        }
+    </script>
+</body>
+
+</html>
